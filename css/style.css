@@ -25,14 +25,22 @@ nav, footer{
     border-bottom: 2px solid #555;
     position: relative;
     overflow: hidden; /* Keeps the cactus from leaving the box */
+    /* Prevents blue highlight box on tap */
+    -webkit-tap-highlight-color: transparent; 
+    user-select: none;
+}
+#dino, #cactus {
+    /* Ensures emojis don't get selected like text */
+    user-select: none;
+    pointer-events: none; 
 }
 
 #dino {
-    width: 40px;
-    height: 40px;
+    width: 65px;
+    height: 60px;
     position: absolute;
     bottom: 0;
-    font-size: 30px;
+    font-size: 50px;
     transform: scaleX(-1);
 }
 
@@ -42,9 +50,9 @@ nav, footer{
     position: absolute;
     bottom: 0;
     right: -20px;
-    font-size: 25px;
+    font-size: 30px;
     /* This makes the cactus move left constantly */
-    animation: move-cactus 1.5s infinite linear;
+    animation: move-cactus 2.5s infinite linear;
 }
 
 @keyframes move-cactus {
