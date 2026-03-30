@@ -102,95 +102,263 @@ nav {
     transform: scale(1.05);
 }
 
-/* Footer Main Container */
+/* Footer Main Container - Improved Design */
 footer {
-    background-color: var(--nav-footer-bg);
-    color: var(--text-dark);
-    padding: 50px 0 20px 0; /* Extra padding on top for a 'pro' look */
+    background: linear-gradient(135deg, #1a2a1a 0%, #0f1a0f 100%);
+    color: var(--text-main);
+    padding: 60px 0 20px 0;
     margin-top: 80px;
-    border-top: 3px solid var(--accent-green); /* Adds that 'Dino' green touch */
+    border-top: 3px solid var(--accent-green);
+    position: relative;
+    box-shadow: 0 -10px 30px rgba(0, 0, 0, 0.3);
+}
+
+/* Decorative Top Wave */
+footer::before {
+    content: '';
+    position: absolute;
+    top: -20px;
+    left: 0;
+    width: 100%;
+    height: 20px;
+    background: linear-gradient(90deg, var(--accent-green), #7cb342, var(--accent-green));
+    opacity: 0.6;
 }
 
 .footer-container {
-    max-width: 1100px;
+    max-width: 1200px;
     margin: 0 auto;
     display: flex;
     justify-content: space-between;
-    flex-wrap: wrap; /* Makes it responsive for mobile */
-    padding: 0 20px;
-    gap: 30px;
+    flex-wrap: wrap;
+    padding: 0 40px;
+    gap: 40px;
 }
 
 /* Column 1: Brand */
+.footer-brand {
+    flex: 1;
+    min-width: 200px;
+}
+
 .footer-brand h3 {
-    margin-bottom: 15px;
-    font-size: 1.4rem;
+    margin-bottom: 20px;
+    font-size: 1.8rem;
+    background: linear-gradient(135deg, #8bc34a, #4caf50);
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    display: inline-block;
 }
 
 .footer-brand p {
     font-size: 0.9rem;
-    line-height: 1.5;
-    opacity: 0.8;
+    line-height: 1.6;
+    color: #b0c4b0;
+    margin-bottom: 20px;
+}
+
+/* Social Icons */
+.social-icons {
+    display: flex;
+    gap: 15px;
+    margin-top: 20px;
+}
+
+.social-icons a {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 36px;
+    height: 36px;
+    background: #2a3a2a;
+    border-radius: 50%;
+    text-decoration: none;
+    color: #8bc34a;
+    transition: all 0.3s ease;
+    font-size: 18px;
+}
+
+.social-icons a:hover {
+    background: var(--accent-green);
+    color: white;
+    transform: translateY(-3px);
 }
 
 /* Column 2: Links */
 .footer-links {
-    display: flex;
-    flex-direction: column;
+    flex: 1;
+    min-width: 150px;
 }
 
 .footer-links h4 {
-    margin-bottom: 15px;
-    color: black; /* Matches your nav hover color */
+    margin-bottom: 20px;
+    color: #8bc34a;
+    font-size: 1.2rem;
+    position: relative;
+    display: inline-block;
+}
+
+.footer-links h4::after {
+    content: '';
+    position: absolute;
+    bottom: -8px;
+    left: 0;
+    width: 40px;
+    height: 2px;
+    background: var(--accent-green);
 }
 
 .footer-links a {
+    display: block;
     text-decoration: none;
-    color: var(--text-dark);
-    margin-bottom: 10px;
+    color: #b0c4b0;
+    margin-bottom: 12px;
     font-size: 0.9rem;
-    transition: 0.3s;
+    transition: all 0.3s ease;
 }
 
 .footer-links a:hover {
-    padding-left: 5px; /* Subtle slide effect */
-    color: rgb(131, 22, 22);
+    color: #8bc34a;
+    padding-left: 8px;
 }
 
-/* Column 3: Newsletter Box */
+/* Column 3: Newsletter */
+.footer-newsletter {
+    flex: 1;
+    min-width: 250px;
+}
+
 .footer-newsletter h4 {
-    margin-bottom: 15px;
+    margin-bottom: 20px;
+    color: #8bc34a;
+    font-size: 1.2rem;
+    position: relative;
+    display: inline-block;
+}
+
+.footer-newsletter h4::after {
+    content: '';
+    position: absolute;
+    bottom: -8px;
+    left: 0;
+    width: 40px;
+    height: 2px;
+    background: var(--accent-green);
 }
 
 .footer-newsletter p {
     font-size: 0.85rem;
-    margin-bottom: 15px;
+    margin-bottom: 20px;
+    color: #b0c4b0;
+    line-height: 1.5;
 }
 
 .footer-form {
     display: flex;
-    gap: 5px;
+    gap: 10px;
+    flex-wrap: wrap;
 }
 
 .footer-form input {
-    padding: 10px;
-    border: 1px solid rgba(0,0,0,0.1);
-    border-radius: 4px;
+    flex: 1;
+    padding: 12px 15px;
+    border: 2px solid #2a3a2a;
+    border-radius: 8px;
+    background: #1a2a1a;
+    color: var(--text-main);
+    font-size: 14px;
+    transition: all 0.3s ease;
+}
+
+.footer-form input:focus {
     outline: none;
-    width: 180px;
+    border-color: var(--accent-green);
+    background: #0f1a0f;
+}
+
+.footer-form input::placeholder {
+    color: #6a7a6a;
 }
 
 .footer-form button {
-    width: auto; /* Overrides the 100% width from the contact page button */
-    padding: 10px 15px;
-    margin-top: 0; /* Removes the margin from the button CSS */
-    background-color: var(--accent-green);
+    width: auto;
+    padding: 12px 20px;
+    margin-top: 0;
+    background: var(--accent-green);
     color: white;
-    font-size: 0.8rem;
+    font-size: 14px;
+    font-weight: bold;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.3s ease;
 }
 
 .footer-form button:hover {
-    background-color: var(--hover-green);
+    background: var(--hover-green);
+    transform: translateY(-2px);
+}
+
+/* Footer Bottom */
+.footer-bottom {
+    text-align: center;
+    padding-top: 40px;
+    margin-top: 40px;
+    border-top: 1px solid #2a3a2a;
+}
+
+.footer-bottom p {
+    font-size: 0.8rem;
+    color: #7a8a7a;
+}
+
+.footer-bottom a {
+    color: #8bc34a;
+    text-decoration: none;
+}
+
+.footer-bottom a:hover {
+    text-decoration: underline;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .footer-container {
+        flex-direction: column;
+        text-align: center;
+        padding: 0 20px;
+        gap: 30px;
+    }
+    
+    .footer-brand h3 {
+        font-size: 1.5rem;
+    }
+    
+    .social-icons {
+        justify-content: center;
+    }
+    
+    .footer-links h4::after,
+    .footer-newsletter h4::after {
+        left: 50%;
+        transform: translateX(-50%);
+    }
+    
+    .footer-links a {
+        text-align: center;
+    }
+    
+    .footer-form {
+        justify-content: center;
+    }
+    
+    .footer-form input {
+        width: 100%;
+    }
+    
+    .footer-form button {
+        width: 100%;
+    }
 }
 /* 4. Contact Container */
 .contact-container {
