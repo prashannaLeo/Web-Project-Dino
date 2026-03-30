@@ -44,6 +44,14 @@ if (contactForm) {
         return regex.test(email);
     }
 
+    // Function to sanitize message (remove HTML/script tags)
+    function sanitizeMessage(message) {
+        // Remove any HTML tags to prevent code injection
+        const tempDiv = document.createElement('div');
+        tempDiv.textContent = message;
+        return tempDiv.textContent;
+    }
+
     function clearErrors() {
         if (emailError) emailError.textContent = '';
         if (messageError) messageError.textContent = '';
@@ -54,9 +62,10 @@ if (contactForm) {
         clearErrors();
         
         const email = emailInput.value.trim();
-        const message = messageInput.value.trim();
+        let message = messageInput.value.trim();
         let isValid = true;
         
+        // Email validation
         if (email === '') {
             emailError.textContent = 'Email is required';
             isValid = false;
@@ -65,9 +74,14 @@ if (contactForm) {
             isValid = false;
         }
         
+        // Message validation - only check if empty, allow any text but sanitize
         if (message === '') {
             messageError.textContent = 'Message is required';
             isValid = false;
+        } else {
+            // Sanitize the message to remove any HTML/script code
+            message = sanitizeMessage(message);
+            messageInput.value = message;
         }
         
         if (isValid) {
@@ -86,5 +100,8 @@ if (contactForm) {
 let score = 0;
 setInterval(() => {
     score++;
-    document.getElementById("score").innerText = score.toString().padStart(6, '0');
+    const scoreElement = document.getElementById("score");
+    if (scoreElement) {
+        scoreElement.innerText = score.toString().padStart(6, '0');
+    }
 }, 100);
