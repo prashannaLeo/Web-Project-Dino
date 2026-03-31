@@ -4,6 +4,10 @@ document.addEventListener("DOMContentLoaded", () => {
     const cactus = document.getElementById("cactus");
     const scoreEl = document.getElementById("score");
     const highScoreEl = document.getElementById("highScore");
+    const roastModalEl = document.getElementById("roast-modal");
+    const roastMessageEl = document.getElementById("roast-message");
+    const roastRestartBtn = document.getElementById("roast-restart-btn");
+    const roastCloseBtn = document.getElementById("roast-close-btn");
 
     let score = 0;
     let isGameOver = false;
@@ -74,6 +78,22 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
     const HIGH_SCORE_KEY = "dino_high_score";
+    const roastLibrary = {
+        pathetic: [
+            "A literal rock has better reflexes than you.",
+            "You are the reason the dinosaurs went extinct.",
+            "That jump timing was a public service announcement for failure.",
+            "Even the cactus looked embarrassed for you.",
+            "You play like your keyboard is powered by potato."
+        ],
+        mediocre: [
+            "Getting better, but you're still a disappointment to the T-Rex family.",
+            "Wow, you almost reached double digits. Want a gold star?",
+            "You jumped over three whole cacti. Absolute legend. (Not.)",
+            "Your score is higher than your GPA, at least.",
+            "Quit while you're... well, you're not ahead, but just quit."
+        ]
+    };
 
     let highScore = Number(localStorage.getItem(HIGH_SCORE_KEY)) || 0;
     if (highScoreEl) {
@@ -136,6 +156,24 @@ document.addEventListener("DOMContentLoaded", () => {
         scoreEl.textContent = String(score).padStart(6, "0");
     }
 
+    function triggerRoast(currentScore) {
+        if (!roastMessageEl || !roastModalEl) return;
+        const category = currentScore < 15 ? roastLibrary.pathetic : roastLibrary.mediocre;
+        const randomRoast = category[Math.floor(Math.random() * category.length)];
+        roastMessageEl.innerText = randomRoast;
+        roastMessageEl.classList.add("show");
+        roastModalEl.classList.add("show");
+        roastModalEl.setAttribute("aria-hidden", "false");
+    }
+
+    function hideRoastModal() {
+        if (!roastModalEl || !roastMessageEl) return;
+        roastModalEl.classList.remove("show");
+        roastModalEl.setAttribute("aria-hidden", "true");
+        roastMessageEl.innerText = "";
+        roastMessageEl.classList.remove("show");
+    }
+
     function startGame() {
         if (!dino || !cactus || !gameContainer) return;
 
@@ -147,6 +185,7 @@ document.addEventListener("DOMContentLoaded", () => {
         gameContainer.classList.remove("game-over");
         dino.classList.remove("animate-jump");
         cactus.classList.remove("cactus-paused");
+        hideRoastModal();
         dinoOffsetXPx = 0;
         dino.style.left = `${dinoStartLeftPx}px`;
 
@@ -200,6 +239,7 @@ document.addEventListener("DOMContentLoaded", () => {
         if (scoreInterval) clearInterval(scoreInterval);
 
         playCrashSound();
+        triggerRoast(score);
 
         // Persist high score
         if (score > highScore) {
@@ -214,6 +254,7 @@ document.addEventListener("DOMContentLoaded", () => {
     // Set up click/tap on the game area
     if (gameContainer) {
         gameContainer.addEventListener("click", () => {
+            if (roastModalEl && roastModalEl.classList.contains("show")) return;
             if (isGameOver) {
                 startGame();
             } else {
@@ -253,6 +294,7 @@ document.addEventListener("DOMContentLoaded", () => {
             "touchstart",
             (event) => {
                 event.preventDefault(); // prevent page scroll while tapping the game
+                if (roastModalEl && roastModalEl.classList.contains("show")) return;
                 if (isGameOver) {
                     startGame();
                 } else {
@@ -261,6 +303,26 @@ document.addEventListener("DOMContentLoaded", () => {
             },
             { passive: false }
         );
+    }
+
+    if (roastRestartBtn) {
+        roastRestartBtn.addEventListener("click", () => {
+            startGame();
+        });
+    }
+
+    if (roastCloseBtn) {
+        roastCloseBtn.addEventListener("click", () => {
+            hideRoastModal();
+        });
+    }
+
+    if (roastModalEl) {
+        roastModalEl.addEventListener("click", (event) => {
+            if (event.target === roastModalEl) {
+                hideRoastModal();
+            }
+        });
     }
 
     // Apply speed updates at loop boundaries to prevent cactus mid-lane popping.
@@ -290,7 +352,7 @@ document.addEventListener("DOMContentLoaded", () => {
     // Make navbar active link state change on click (for multi-page feel)
     const navLinks = document.querySelectorAll('.nav-links a');
     navLinks.forEach(link => {
-        link.addEventListener('click', function() {
+        link.addEventListener('click', function () {
             navLinks.forEach(l => l.classList.remove('active'));
             this.classList.add('active');
         });

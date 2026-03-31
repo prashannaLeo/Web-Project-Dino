@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Game Zone - Dino World</title>
     <link rel="stylesheet" href="../css/style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
 </head>
 <body>
     <nav class="navbar">
@@ -34,7 +35,17 @@
             
             <div class="ground"></div>
         </div>
-
+        <!-- Roast Modal -->
+        <div id="roast-modal" class="roast-modal" aria-hidden="true" role="dialog" aria-labelledby="roast-title">
+            <div class="roast-card">
+                <h3 id="roast-title" class="roast-title">GAME OVER</h3>
+                <p id="roast-message" class="roast-text" aria-live="polite"></p>
+                <div class="roast-buttons">
+                    <button id="roast-restart-btn" class="roast-btn restart-btn">PLAY AGAIN</button>
+                    <button id="roast-close-btn" class="roast-btn close-btn">CLOSE</button>
+                </div>
+            </div>
+        </div>
         <div class="game-instructions">
             <div class="instruction-card">
                 <span class="key">SPACE</span>
