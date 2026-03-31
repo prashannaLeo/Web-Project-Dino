@@ -343,7 +343,10 @@ nav .nav-links .menu-items:hover {
     height: 40px;
     object-fit: contain;
 }
-
+ .card a{
+    text-decoration: none;
+    color: var(--text-white);
+ }
 /* ========================================
    Footer - Fancy (Contact & Game pages)
    ======================================== */
