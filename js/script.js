@@ -74,7 +74,6 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
     const HIGH_SCORE_KEY = "dino_high_score";
-    const CURRENT_SCORE_KEY = "dino_current_score";
 
     let highScore = Number(localStorage.getItem(HIGH_SCORE_KEY)) || 0;
     if (highScoreEl) {
@@ -144,7 +143,6 @@ document.addEventListener("DOMContentLoaded", () => {
         isGameOver = false;
         score = 0;
         updateScoreDisplay();
-        localStorage.setItem(CURRENT_SCORE_KEY, "0");
 
         gameContainer.classList.remove("game-over");
         dino.classList.remove("animate-jump");
@@ -187,11 +185,6 @@ document.addEventListener("DOMContentLoaded", () => {
                 score += 1;
                 updateScoreDisplay();
 
-                // Save current score occasionally (avoid writing every tick).
-                if (score % 10 === 0) {
-                    localStorage.setItem(CURRENT_SCORE_KEY, String(score));
-                }
-
                 // Ramp speed with score; apply on next animation cycle.
                 pendingCactusDurationMs = getCactusDurationForScore(score);
             }
@@ -208,8 +201,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
         playCrashSound();
 
-        // Persist scores
-        localStorage.setItem(CURRENT_SCORE_KEY, String(score));
+        // Persist high score
         if (score > highScore) {
             highScore = score;
             if (highScoreEl) {
@@ -279,33 +271,6 @@ document.addEventListener("DOMContentLoaded", () => {
                 cactus.style.animationDuration = targetDuration;
             }
         });
-    }
-
-    // Home page preview (only if the canvas exists)
-    const canvas = document.getElementById('gameCanvas');
-    if (canvas) {
-        const ctx = canvas.getContext('2d');
-
-        // Drawing a simple placeholder dino and ground on the canvas
-        function drawPreview() {
-            // Ground
-            ctx.strokeStyle = '#333';
-            ctx.lineWidth = 2;
-            ctx.beginPath();
-            ctx.moveTo(0, 180);
-            ctx.lineTo(600, 180);
-            ctx.stroke();
-
-            // Placeholder Text
-            ctx.fillStyle = '#121212';
-            ctx.font = '16px Arial';
-            ctx.fillText('Game Engine Ready...', 220, 100);
-
-            // Simple Dino Shape (placeholder)
-            ctx.fillStyle = '#555';
-            ctx.fillRect(50, 140, 40, 40);
-        }
-        drawPreview();
     }
 
     // Newsletter Submission Logic

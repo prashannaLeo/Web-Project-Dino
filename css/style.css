@@ -14,7 +14,6 @@
     --text-accent: #39FF14;
     --text-dark: #e0e0e0;
     --text-muted: #b3b3b3;
-    --accent-cream: #fdf5e6;
     --error-red: #ff4444;
     --footer-border: #39FF14;
 }
@@ -100,7 +99,6 @@ nav,
 }
 
 nav .logo,
-nav .logo-link,
 .navbar .logo {
     font-weight: bold;
     font-size: 1.5rem;
@@ -179,14 +177,6 @@ nav .nav-links a.active,
 .navbar .nav-links a:hover,
 .navbar .nav-links a.active {
     color: var(--neon-green);
-}
-
-nav .nav-links .menu-items {
-    color: var(--text-dark);
-}
-
-nav .nav-links .menu-items:hover {
-    color: rgb(131, 22, 22);
 }
 
 .btn-game-zone {
@@ -301,51 +291,6 @@ nav .nav-links .menu-items:hover {
     border: 1px solid #3a553a;
 }
 
-.footer-form {
-    display: flex;
-    gap: 10px;
-    flex-wrap: wrap;
-}
-
-.footer-form input {
-    flex: 1;
-    padding: 12px 15px;
-    border: 2px solid #2a3a2a;
-    border-radius: 8px;
-    background: #1a2a1a;
-    color: var(--text-main);
-    font-size: 14px;
-    transition: all 0.3s ease;
-}
-
-.footer-form input:focus {
-    outline: none;
-    border-color: var(--accent-green);
-    background: #0f1a0f;
-}
-
-.footer-form input::placeholder {
-    color: #6a7a6a;
-}
-
-.footer-form button {
-    width: auto;
-    padding: 12px 20px;
-    margin-top: 0;
-    background: var(--accent-green);
-    color: white;
-    font-size: 14px;
-    font-weight: bold;
-    border-radius: 8px;
-    cursor: pointer;
-    transition: all 0.3s ease;
-}
-
-.footer-form button:hover {
-    background: var(--hover-green);
-    transform: translateY(-2px);
-}
-
 /* ========================================
    Cards
    ======================================== */
@@ -384,179 +329,6 @@ nav .nav-links .menu-items:hover {
     width: 48px;
     height: 48px;
     object-fit: contain;
-}
- .card a{
-    text-decoration: none;
-    color: var(--text-white);
- }
-/* ========================================
-   Footer - Fancy (Contact & Game pages)
-   ======================================== */
-footer:not(.footer) {
-    background: linear-gradient(135deg, #1a2a1a 0%, #0f1a0f 100%);
-    color: var(--text-main);
-    padding: 60px 0 20px 0;
-    margin-top: 80px;
-    border-top: 3px solid var(--accent-green);
-    position: relative;
-    box-shadow: 0 -10px 30px rgba(0, 0, 0, 0.3);
-}
-
-footer:not(.footer)::before {
-    content: '';
-    position: absolute;
-    top: -20px;
-    left: 0;
-    width: 100%;
-    height: 20px;
-    background: linear-gradient(90deg, var(--accent-green), #7cb342, var(--accent-green));
-    opacity: 0.6;
-}
-
-footer:not(.footer) .footer-container {
-    max-width: 1200px;
-    margin: 0 auto;
-    display: flex;
-    justify-content: space-between;
-    flex-wrap: wrap;
-    padding: 0 40px;
-    gap: 40px;
-}
-
-footer:not(.footer) .footer-brand {
-    flex: 1;
-    min-width: 200px;
-}
-
-footer:not(.footer) .footer-brand h3 {
-    margin-bottom: 20px;
-    font-size: 1.8rem;
-    background: linear-gradient(135deg, #8bc34a, #4caf50);
-    background-clip: text;
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    display: inline-block;
-}
-
-footer:not(.footer) .footer-brand p {
-    font-size: 0.9rem;
-    line-height: 1.6;
-    color: #b0c4b0;
-    margin-bottom: 20px;
-}
-
-footer:not(.footer) .social-icons {
-    display: flex;
-    gap: 15px;
-    margin-top: 20px;
-}
-
-footer:not(.footer) .social-icons a {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    width: 36px;
-    height: 36px;
-    background: #2a3a2a;
-    border-radius: 50%;
-    text-decoration: none;
-    color: #8bc34a;
-    transition: all 0.3s ease;
-    font-size: 18px;
-}
-
-footer:not(.footer) .social-icons a:hover {
-    background: var(--accent-green);
-    color: white;
-    transform: translateY(-3px);
-}
-
-footer:not(.footer) .footer-links {
-    flex: 1;
-    min-width: 150px;
-}
-
-footer:not(.footer) .footer-links h4 {
-    margin-bottom: 20px;
-    color: #8bc34a;
-    font-size: 1.2rem;
-    position: relative;
-    display: inline-block;
-}
-
-footer:not(.footer) .footer-links h4::after {
-    content: '';
-    position: absolute;
-    bottom: -8px;
-    left: 0;
-    width: 40px;
-    height: 2px;
-    background: var(--accent-green);
-}
-
-footer:not(.footer) .footer-links a {
-    display: block;
-    text-decoration: none;
-    color: #b0c4b0;
-    margin-bottom: 12px;
-    font-size: 0.9rem;
-    transition: all 0.3s ease;
-}
-
-footer:not(.footer) .footer-links a:hover {
-    color: #8bc34a;
-    padding-left: 8px;
-}
-
-footer:not(.footer) .footer-newsletter {
-    flex: 1;
-    min-width: 250px;
-}
-
-footer:not(.footer) .footer-newsletter h4 {
-    margin-bottom: 20px;
-    color: #8bc34a;
-    font-size: 1.2rem;
-    position: relative;
-    display: inline-block;
-}
-
-footer:not(.footer) .footer-newsletter h4::after {
-    content: '';
-    position: absolute;
-    bottom: -8px;
-    left: 0;
-    width: 40px;
-    height: 2px;
-    background: var(--accent-green);
-}
-
-footer:not(.footer) .footer-newsletter p {
-    font-size: 0.85rem;
-    margin-bottom: 20px;
-    color: #b0c4b0;
-    line-height: 1.5;
-}
-
-footer:not(.footer) .footer-bottom {
-    text-align: center;
-    padding-top: 40px;
-    margin-top: 40px;
-    border-top: 1px solid #2a3a2a;
-}
-
-footer:not(.footer) .footer-bottom p {
-    font-size: 0.8rem;
-    color: #7a8a7a;
-}
-
-footer:not(.footer) .footer-bottom a {
-    color: #8bc34a;
-    text-decoration: none;
-}
-
-footer:not(.footer) .footer-bottom a:hover {
-    text-decoration: underline;
 }
 
 /* ========================================
@@ -628,20 +400,6 @@ footer:not(.footer) .footer-bottom a:hover {
 }
 
 /* ========================================
-   Footer - About Page
-   ======================================== */
-.footer:not(:has(.footer-top)) {
-    text-align: center;
-    padding: 50px;
-    color: #555;
-}
-
-.footer:not(:has(.footer-top)) .copyright {
-    margin: 0;
-    font-size: 0.8rem;
-}
-
-/* ========================================
    Home Page
    ======================================== */
 .hero {
@@ -668,7 +426,7 @@ footer:not(.footer) .footer-bottom a:hover {
 .hero-image {
     flex: 1;
     min-width: 350px;
-    height: 400px;
+    height: 350px;
     background: transparent;
     border-radius: 4px;
     display: flex;
@@ -676,11 +434,6 @@ footer:not(.footer) .footer-bottom a:hover {
     justify-content: center;
     position: relative;
     overflow: hidden;
-}
-
-#gameCanvas {
-    width: 100%;
-    height: 100%;
 }
 
 .hero-video {
@@ -1018,44 +771,6 @@ body.about-page {
    Responsive Design
    ======================================== */
 @media (max-width: 768px) {
-    /* Fancy Footer */
-    footer:not(.footer) .footer-container {
-        flex-direction: column;
-        text-align: center;
-        padding: 0 20px;
-        gap: 30px;
-    }
-
-    footer:not(.footer) .footer-brand h3 {
-        font-size: 1.5rem;
-    }
-
-    footer:not(.footer) .social-icons {
-        justify-content: center;
-    }
-
-    footer:not(.footer) .footer-links h4::after,
-    footer:not(.footer) .footer-newsletter h4::after {
-        left: 50%;
-        transform: translateX(-50%);
-    }
-
-    footer:not(.footer) .footer-links a {
-        text-align: center;
-    }
-
-    footer:not(.footer) .footer-form {
-        justify-content: center;
-    }
-
-    footer:not(.footer) .footer-form input {
-        width: 100%;
-    }
-
-    footer:not(.footer) .footer-form button {
-        width: 100%;
-    }
-
     /* Home page */
     .hero-content h1 {
         font-size: 2.5rem;
