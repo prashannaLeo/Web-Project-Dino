@@ -9,6 +9,7 @@
     --accent-green: #39FF14;
     --hover-green: #2ecc71;
     --text-white: #ffffff;
+    --text-black: #000000;
     --text-gray: #b3b3b3;
     --text-main: #ffffff;
     --text-accent: #39FF14;
@@ -57,7 +58,7 @@ button:hover {
 
 .game-btn {
     background-color: var(--accent-green);
-    color: var(--text-white) !important;
+    color: var(--text-black) !important;
     padding: 8px 18px;
     border-radius: 5px;
     text-decoration: none;
@@ -74,12 +75,35 @@ button:hover {
 .btn-play {
     background: var(--neon-green);
     border: none;
+    color: var(--text-black);
     padding: 15px 30px;
     border-radius: 8px;
     font-weight: bold;
     cursor: pointer;
     font-family: 'Press Start 2P', cursive;
     font-size: 0.7rem;
+    animation: btn-pulse 2s ease-in-out infinite;
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+}
+
+.btn-play:hover {
+    background: var(--hover-green);
+    transform: scale(1.05);
+    box-shadow: 0 0 25px var(--neon-green);
+    animation: none;
+}
+
+@keyframes btn-pulse {
+    0%, 100% {
+        transform: scale(1);
+        box-shadow: 0 0 10px rgba(57, 255, 20, 0.4);
+    }
+    50% {
+        transform: scale(1.03);
+        box-shadow: 0 0 20px rgba(57, 255, 20, 0.8);
+    }
 }
 
 /* ========================================
@@ -181,7 +205,7 @@ nav .nav-links a.active,
 
 .btn-game-zone {
     background: var(--neon-green);
-    color: var(--text-white);
+    color: var(--text-black);
     border: none;
     padding: 10px 20px;
     border-radius: 25px;
@@ -417,10 +441,12 @@ nav .nav-links a.active,
 }
 
 .hero-content h1 {
-    font-size: 3.5rem;
+    font-size: 3rem;
     margin-bottom: 30px;
     line-height: 1.1;
-    font-weight: 800;
+    font-weight: 500;
+    font-family:'JetBrains Mono', monospace;
+    
 }
 
 .hero-image {
@@ -777,8 +803,26 @@ body.about-page {
     }
 
     nav {
-        flex-direction: column;
+        flex-direction: row;
+        flex-wrap: wrap;
+        align-items: flex-start;
         gap: 15px;
+    }
+
+    .navbar .logo {
+        order: 1;
+    }
+
+    .navbar .nav-links {
+        order: 3;
+        width: 100%;
+        justify-content: center;
+        margin-top: 10px;
+    }
+
+    .btn-game-zone {
+        order: 2;
+        margin-left: auto;
     }
 }
 
