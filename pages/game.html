@@ -7,14 +7,17 @@
     <link rel="stylesheet" href="../css/style.css">
 </head>
 <body>
-    <nav>
-        <a href="index.html" class="logo-link">🦖 DINO WORLD</a>
-        <div class="nav-links">
-            <a href="index.html" class="menu-items">Home</a>
-            <a href="about.html" class="menu-items">About</a>
-            <a href="contact.html" class="menu-items">Contact</a>
-            <a href="game.html" class="game-btn">Game Zone →</a>
+    <nav class="navbar">
+        <div class="logo">
+            <img src="https://img.icons8.com/color/48/t-rex.png" alt="Dino Logo" class="nav-dino">
+            <span>LOGO</span>
         </div>
+        <ul class="nav-links">
+            <li><a href="../index.html">Home</a></li>
+            <li><a href="./about.html">About</a></li>
+            <li><a href="./contact.html">Contact</a></li>
+        </ul>
+        <a href="./game.html" class="btn-game-zone">Game Zone &rarr;</a>
     </nav>
 
     <main class="game-page-container">
@@ -42,29 +45,28 @@
         </div>
     </main>
 
-    <footer>
-        <div class="footer-container">
-            <div class="footer-brand">
-                <h3>🦖 DINO WORLD</h3>
-                <p>&copy; 2026 Dino Game. <br> Mastering Web Development.</p>
+    <footer class="footer">
+        <div class="footer-top">
+            <div class="team-section">
+                <h3>Website: <span class="site-name">runwithdino</span></h3>
+                <p class="site-intro">RunWithDino is an interactive platform documenting our growth in web technologies. We've transformed a simple learning path into a gamified experience, focusing on clean code and responsive design.</p>
+
+                <div class="members-list">
+                    <h4>Team Members</h4>
+                    <p>Kabit Khadka, Sarjyant Maharjan, Prashanna Dhami</p>
+                </div>
             </div>
-            <div class="footer-links">
-                <h4>Navigate</h4>
-                <a href="index.html">Home</a>
-                <a href="about.html">Team</a>
-                <a href="contact.html">Contact</a>
-            </div>
-            <div class="footer-newsletter">
-                <h4>Stay Updated</h4>
-                <form class="footer-form">
-                    <input type="email" placeholder="Email Address">
-                    <button type="submit">Join</button>
-                </form>
+
+            <div class="newsletter">
+                <h3>NewsLetter</h3>
+                <div class="input-group">
+                    <input type="email" placeholder="user email..." id="userEmail">
+                    <button id="submitBtn">Submit</button>
+                </div>
+                <p>get updated about latest games</p>
             </div>
         </div>
-        <div class="footer-bottom">
-            &copy; 2026 Dino World. Built with ❤️ by our Team.
-        </div>
+        <p class="copyright">@copyright dino world 2026</p>
     </footer>
 
     <script src="../js/script.js"></script>
