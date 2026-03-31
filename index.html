@@ -1,23 +1,88 @@
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Dino Game</title>
-        <link rel="stylesheet" href="./css/style.css">
-    </head>
-    <body>
-        <nav>
-            <a href="#" class="menu-items">Home</a>
-            <a href="#" class="menu-items">About</a>
-            <a href="#" class="menu-items">Contact</a>
-        </nav>
-        <div class="game-container" id="game">
-            <div id="dino">🦖</div>
-            <div id="cactus">🌵</div>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RunWithDino | Web Dev Journey</title>
+    <link rel="stylesheet" href="./css/style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&family=Press+Start+2P&display=swap" rel="stylesheet">
+</head>
+<body>
+
+    <nav class="navbar">
+        <div class="logo">
+            <span class="dino-icon">🦖</span> LOGO
         </div>
-        <div class="help-note">Press Space to jump</div>
-        <footer>&copy; 2024 Dino Game</footer>
+        <ul class="nav-links">
+            <li><a href="#" class="active">Home</a></li>
+            <li><a href="./pages/about.html">About us</a></li>
+            <li><a href="./pages/contact.html">Contact us</a></li>
+        </ul>
+        <button class="btn-game-zone">Game Zone &rarr;</button>
+    </nav>
+
+    <header class="hero">
+        <div class="hero-content">
+            <h1>Dino World: Web Development Journey</h1>
+            <button class="btn-play">PLAY DINO GAME</button>
+        </div>
+        <div class="hero-image">
+            <canvas id="gameCanvas" width="600" height="200"></canvas>
+            <div class="ground-decoration"></div>
+        </div>
+    </header>
+
+    <section class="what-we-learnt">
+        <h2>What we learnt</h2>
+        <div class="card-container">
+            <div class="card">
+                <div class="card-header">
+                    <img src="https://cdn.pixabay.com/photo/2017/08/05/11/16/logo-2582748_1280.png" alt="HTML5">
+                    <h3>HTML</h3>
+                </div>
+                <p>High-quality structure is the skeleton of our web rooms and definitions.</p>
+            </div>
+            <div class="card">
+                <div class="card-header">
+                    <img src="https://cdn.pixabay.com/photo/2017/08/05/11/16/logo-2582747_1280.png" alt="CSS3">
+                    <h3>CSS</h3>
+                </div>
+                <p>CSS definitions provide the decorations, layouts, and visual definitions.</p>
+            </div>
+            <div class="card">
+                <div class="card-header">
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/6/6a/JavaScript-logo.png" alt="JS">
+                    <h3>JS</h3>
+                </div>
+                <p>High-quality logic handles the descriptions, interactions, and game definitions.</p>
+            </div>
+        </div>
+    </section>
+
+    <footer class="footer">
+        <div class="footer-top">
+            <div class="team-section">
+                <h3>Website: <span class="site-name">runwithdino</span></h3>
+                <p class="site-intro">RunWithDino is an interactive platform documenting our growth in web technologies. We've transformed a simple learning path into a gamified experience, focusing on clean code and responsive design.</p>
+                
+                <div class="members-list">
+                    <h4>Team Members</h4>
+                    <p>Kabit Khadka, Sarjyant Maharjan, Prashanna Dhami</p>
+                </div>
+            </div>
+
+            <div class="newsletter">
+                <h3>NewsLetter</h3>
+                <div class="input-group">
+                    <input type="email" placeholder="user email..." id="userEmail">
+                    <button id="submitBtn">Submit</button>
+                </div>
+                <p>get updated about latest games</p>
+            </div>
+        </div>
+        <p class="copyright">@copyright dino world 2026</p>
+    </footer>
+
     <script src="./js/script.js"></script>
-    </body>
+</body>
 </html>
