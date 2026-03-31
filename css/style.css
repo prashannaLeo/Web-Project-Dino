@@ -668,7 +668,7 @@ footer:not(.footer) .footer-bottom a:hover {
 .hero-image {
     flex: 1;
     min-width: 350px;
-    height: 400px;
+    height: 350px;
     background: transparent;
     border-radius: 4px;
     display: flex;
