@@ -5,18 +5,21 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Contact Us - Dino Game</title>
     <link rel="stylesheet" href="../css/style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&family=Press+Start+2P&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 </head>
 <body>
-<nav>
-    <a href="index.html" class="logo-link">🦖 DINO WORLD</a>
-
-    <div class="nav-links">
-        <a href="../index.html" class="menu-items">Home</a>
-        <a href="../pages/about.html" class="menu-items">About</a>
-        <a href="../pages/contact.html" class="menu-items">Contact</a>
-        
-        <a href="game.html" class="game-btn">Game Zone →</a>
+<nav class="navbar">
+    <div class="logo">
+        <img src="https://img.icons8.com/color/48/t-rex.png" alt="Dino Logo" class="nav-dino">
+        <span>LOGO</span>
     </div>
+    <ul class="nav-links">
+        <li><a href="../index.html">Home</a></li>
+        <li><a href="./about.html">About us</a></li>
+        <li><a href="./contact.html" class="active">Contact us</a></li>
+    </ul>
+    <a href="./game.html" class="btn-game-zone">Game Zone &rarr;</a>
 </nav>
     <div class="contact-container">
         <h1>Get in Touch!</h1>
@@ -48,40 +51,28 @@
         </div>
     </div>
 
-<footer>
-    <div class="footer-container">
-        <div class="footer-brand">
-            <h3>🦖 DINO WORLD</h3>
-            <p>Mastering Web Development with prehistoric fun! <br>Jump, run, and explore the dino adventure.</p>
-            <div class="social-icons">
-                <a href="#">📘</a>
-                <a href="#">🐦</a>
-                <a href="#">📷</a>
-                <a href="#">🎮</a>
+<footer class="footer">
+    <div class="footer-top">
+        <div class="team-section">
+            <h3>Website: <span class="site-name">runwithdino</span></h3>
+            <p class="site-intro">RunWithDino is an interactive platform documenting our growth in web technologies. We've transformed a simple learning path into a gamified experience, focusing on clean code and responsive design.</p>
+
+            <div class="members-list">
+                <h4>Team Members</h4>
+                <p>Kabit Khadka, Sarjyant Maharjan, Prashanna Dhami</p>
             </div>
         </div>
 
-        <div class="footer-links">
-            <h4>Quick Links</h4>
-            <a href="index.html">🏠 Home</a>
-            <a href="about.html">📖 About Team</a>
-            <a href="contact.html">📧 Contact Us</a>
-            <a href="game.html">🎮 Game Zone</a>
-        </div>
-
-        <div class="footer-newsletter">
-            <h4>📬 Newsletter</h4>
-            <p>Get updated about latest games and features!</p>
-            <form class="footer-form">
-                <input type="email" placeholder="Enter your email...">
-                <button type="submit">Subscribe →</button>
-            </form>
+        <div class="newsletter">
+            <h3>NewsLetter</h3>
+            <div class="input-group">
+                <input type="email" placeholder="user email..." id="userEmail">
+                <button id="submitBtn">Submit</button>
+            </div>
+            <p>get updated about latest games</p>
         </div>
     </div>
-    
-    <div class="footer-bottom">
-        <p>&copy; 2026 Dino World. All rights reserved. | Made with 🦖 for dino lovers</p>
-    </div>
+    <p class="copyright">@copyright dino world 2026</p>
 </footer>   
 
     <script src="../js/script.js"></script>
