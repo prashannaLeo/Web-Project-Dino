@@ -19,57 +19,472 @@ body {
     line-height: 1.6;
 }
 
-  .game-container {
-    width: 100%;
-    height: 200px;
-    border-bottom: 2px solid #555;
+.menu-items {
+    text-decoration: none;
+    color: var(--text-dark);
+    font-weight: 500;
+    transition: 0.3s;
+}
+
+.menu-items:hover {
+    color: rgb(131, 22, 22);
+}
+
+/* The Green "Game Zone" Button */
+.game-btn {
+    background-color: var(--accent-green);
+    color: var(--text-white) !important; /* Forces white text */
+    padding: 8px 18px;
+    border-radius: 5px;
+    text-decoration: none;
+    font-weight: bold;
+    transition: 0.3s;
+}
+
+.game-btn:hover {
+    background-color: var(--hover-green);
+    transform: scale(1.05);
+}
+
+/* Footer Main Container - Improved Design */
+footer {
+    background: linear-gradient(135deg, #1a2a1a 0%, #0f1a0f 100%);
+    color: var(--text-main);
+    padding: 60px 0 20px 0;
+    margin-top: 80px;
+    border-top: 3px solid var(--accent-green);
     position: relative;
-    overflow: hidden; /* Keeps the cactus from leaving the box */
-    /* Prevents blue highlight box on tap */
-    -webkit-tap-highlight-color: transparent; 
-    user-select: none;
-}
-#dino, #cactus {
-    /* Ensures emojis don't get selected like text */
-    user-select: none;
-    pointer-events: none; 
+    box-shadow: 0 -10px 30px rgba(0, 0, 0, 0.3);
 }
 
-#dino {
-    width: 65px;
-    height: 60px;
+/* Decorative Top Wave */
+footer::before {
+    content: '';
+    position: absolute;
+    top: -20px;
+    left: 0;
+    width: 100%;
+    height: 20px;
+    background: linear-gradient(90deg, var(--accent-green), #7cb342, var(--accent-green));
+    opacity: 0.6;
+}
+
+.footer-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    padding: 0 40px;
+    gap: 40px;
+}
+
+/* Column 1: Brand */
+.footer-brand {
+    flex: 1;
+    min-width: 200px;
+}
+
+.footer-brand h3 {
+    margin-bottom: 20px;
+    font-size: 1.8rem;
+    background: linear-gradient(135deg, #8bc34a, #4caf50);
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    display: inline-block;
+}
+
+.footer-brand p {
+    font-size: 0.9rem;
+    line-height: 1.6;
+    color: #b0c4b0;
+    margin-bottom: 20px;
+}
+
+/* Social Icons */
+.social-icons {
+    display: flex;
+    gap: 15px;
+    margin-top: 20px;
+}
+
+.social-icons a {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 36px;
+    height: 36px;
+    background: #2a3a2a;
+    border-radius: 50%;
+    text-decoration: none;
+    color: #8bc34a;
+    transition: all 0.3s ease;
+    font-size: 18px;
+}
+
+.social-icons a:hover {
+    background: var(--accent-green);
+    color: white;
+    transform: translateY(-3px);
+}
+
+/* Column 2: Links */
+.footer-links {
+    flex: 1;
+    min-width: 150px;
+}
+
+.footer-links h4 {
+    margin-bottom: 20px;
+    color: #8bc34a;
+    font-size: 1.2rem;
+    position: relative;
+    display: inline-block;
+}
+
+.footer-links h4::after {
+    content: '';
+    position: absolute;
+    bottom: -8px;
+    left: 0;
+    width: 40px;
+    height: 2px;
+    background: var(--accent-green);
+}
+
+.footer-links a {
+    display: block;
+    text-decoration: none;
+    color: #b0c4b0;
+    margin-bottom: 12px;
+    font-size: 0.9rem;
+    transition: all 0.3s ease;
+}
+
+.footer-links a:hover {
+    color: #8bc34a;
+    padding-left: 8px;
+}
+
+/* Column 3: Newsletter */
+.footer-newsletter {
+    flex: 1;
+    min-width: 250px;
+}
+
+.footer-newsletter h4 {
+    margin-bottom: 20px;
+    color: #8bc34a;
+    font-size: 1.2rem;
+    position: relative;
+    display: inline-block;
+}
+
+.footer-newsletter h4::after {
+    content: '';
+    position: absolute;
+    bottom: -8px;
+    left: 0;
+    width: 40px;
+    height: 2px;
+    background: var(--accent-green);
+}
+
+.footer-newsletter p {
+    font-size: 0.85rem;
+    margin-bottom: 20px;
+    color: #b0c4b0;
+    line-height: 1.5;
+}
+
+.footer-form {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+}
+
+.footer-form input {
+    flex: 1;
+    padding: 12px 15px;
+    border: 2px solid #2a3a2a;
+    border-radius: 8px;
+    background: #1a2a1a;
+    color: var(--text-main);
+    font-size: 14px;
+    transition: all 0.3s ease;
+}
+
+.footer-form input:focus {
+    outline: none;
+    border-color: var(--accent-green);
+    background: #0f1a0f;
+}
+
+.footer-form input::placeholder {
+    color: #6a7a6a;
+}
+
+.footer-form button {
+    width: auto;
+    padding: 12px 20px;
+    margin-top: 0;
+    background: var(--accent-green);
+    color: white;
+    font-size: 14px;
+    font-weight: bold;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.footer-form button:hover {
+    background: var(--hover-green);
+    transform: translateY(-2px);
+}
+
+/* Footer Bottom */
+.footer-bottom {
+    text-align: center;
+    padding-top: 40px;
+    margin-top: 40px;
+    border-top: 1px solid #2a3a2a;
+}
+
+.footer-bottom p {
+    font-size: 0.8rem;
+    color: #7a8a7a;
+}
+
+.footer-bottom a {
+    color: #8bc34a;
+    text-decoration: none;
+}
+
+.footer-bottom a:hover {
+    text-decoration: underline;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .footer-container {
+        flex-direction: column;
+        text-align: center;
+        padding: 0 20px;
+        gap: 30px;
+    }
+    
+    .footer-brand h3 {
+        font-size: 1.5rem;
+    }
+    
+    .social-icons {
+        justify-content: center;
+    }
+    
+    .footer-links h4::after,
+    .footer-newsletter h4::after {
+        left: 50%;
+        transform: translateX(-50%);
+    }
+    
+    .footer-links a {
+        text-align: center;
+    }
+    
+    .footer-form {
+        justify-content: center;
+    }
+    
+    .footer-form input {
+        width: 100%;
+    }
+    
+    .footer-form button {
+        width: 100%;
+    }
+}
+/* 4. Contact Container */
+.contact-container {
+    max-width: 500px;
+    margin: 50px auto;
+    padding: 0 20px;
+    min-height: calc(100vh - 250px);
+}
+
+.contact-container h1 {
+    color: var(--text-white);
+    margin-bottom: 30px;
+    text-align: center;
+}
+
+/* 5. Form Styles */
+.form-group {
+    margin-bottom: 20px;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: bold;
+    color: var(--text-white);
+}
+
+.form-group input,
+.form-group textarea {
+    width: 100%;
+    padding: 12px;
+    border: 2px solid var(--card-bg);
+    border-radius: 8px;
+    background: var(--card-bg);
+    color: var(--text-main);
+    font-size: 16px;
+}
+
+.form-group input:focus,
+.form-group textarea:focus {
+    outline: none;
+    border-color: var(--text-accent);
+    background: #142014;
+}
+
+/* 6. Button Styles */
+button {
+    background: var(--accent-green);
+    color: var(--text-white);
+    border: none;
+    padding: 12px 20px;
+    cursor: pointer;
+    border-radius: 8px;
+    width: 100%;
+    font-size: 16px;
+    font-weight: bold;
+    margin-top: 10px;
+    transition: 0.2s;
+}
+
+button:hover {
+    background: var(--hover-green);
+}
+
+/* 7. Validation & Feedback */
+.error {
+    color: var(--error-red);
+    font-size: 12px;
+    margin-top: 5px;
+    min-height: 20px;
+}
+
+#successMsg {
+    margin-top: 15px;
+    padding: 10px;
+    background: #1e3a1e;
+    color: #b8d9b0;
+    border-radius: 8px;
+    display: none;
+    text-align: center;
+    border: 1px solid var(--text-accent);
+}
+
+#successMsg.show {
+    display: block;
+}
+
+/* 8. Footer Info & Dino Message */
+.direct-email {
+    margin-top: 30px;
+    padding-top: 20px;
+    border-top: 1px solid var(--card-bg);
+    text-align: center;
+}
+
+.direct-email p {
+    color: var(--text-muted);
+}
+
+.direct-email strong {
+    color: var(--text-accent);
+    font-size: 18px;
+}
+
+.dino-message {
+    margin-top: 20px;
+    padding: 15px;
+    background: #1a241a;
+    text-align: center;
+    border-radius: 8px;
+    color: #c0a86a;
+    border: 1px solid #3a553a;
+}
+
+/* Game Page Layout */
+.game-page-container {
+    max-width: 800px;
+    margin: 40px auto;
+    text-align: center;
+}
+
+.game-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+    padding: 0 10px;
+    color: var(--text-white);
+}
+
+#score {
+    font-family: 'Courier New', Courier, monospace;
+    color: var(--accent-green);
+    font-size: 1.5rem;
+    font-weight: bold;
+}
+
+/* Enhanced Game Container */
+.game-container {
+    background-color: #000; /* True black for the 'screen' */
+    border: 4px solid var(--footer-border);
+    border-radius: 12px;
+    box-shadow: 0 0 20px rgba(76, 175, 80, 0.2); /* Subtle green glow */
+    cursor: pointer;
+    overflow: hidden;
+    position: relative;
+    height: 250px; /* Increased height for better gameplay */
+    width: 100%;
+}
+
+.ground {
     position: absolute;
     bottom: 0;
-    font-size: 50px;
-    transform: scaleX(-1);
+    width: 100%;
+    height: 2px;
+    background-color: var(--accent-green);
 }
 
-#cactus {
-    width: 20px;
-    height: 40px;
-    position: absolute;
-    bottom: 0;
-    right: -20px;
-    font-size: 30px;
-    /* This makes the cactus move left constantly */
-    animation: move-cactus 2.5s infinite linear;
+/* Instructions Styling */
+.game-instructions {
+    display: flex;
+    justify-content: center;
+    gap: 30px;
+    margin-top: 30px;
 }
 
-@keyframes move-cactus {
-    0% { right: -20px; }
-    100% { right: 100%; }
+.instruction-card {
+    background: var(--card-bg);
+    padding: 15px 25px;
+    border-radius: 8px;
+    border: 1px solid var(--footer-border);
 }
 
-/* The Jump Animation */
-.animate-jump {
-    animation: jump 0.5s linear;
-}
-
-@keyframes jump {
-    0% { bottom: 0; transform: scaleX(-1); }
-    30% { bottom: 100px; transform: scaleX(-1); }
-    70% { bottom: 100px; transform: scaleX(-1); }
-    100% { bottom: 0; transform: scaleX(-1); }
+.key {
+    display: inline-block;
+    background: #333;
+    color: white;
+    padding: 5px 10px;
+    border-radius: 4px;
+    border-bottom: 3px solid #111;
+    font-weight: bold;
+    margin-bottom: 8px;
 }
 
 

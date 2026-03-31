@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Game Zone - Dino World</title>
+    <link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+    <nav>
+        <a href="index.html" class="logo-link">🦖 DINO WORLD</a>
+        <div class="nav-links">
+            <a href="index.html" class="menu-items">Home</a>
+            <a href="about.html" class="menu-items">About</a>
+            <a href="contact.html" class="menu-items">Contact</a>
+            <a href="game.html" class="game-btn">Game Zone →</a>
+        </div>
+    </nav>
+
+    <main class="game-page-container">
+        <div class="game-header">
+            <h1>Dino Run</h1>
+            <p>Score: <span id="score">000000</span></p>
+        </div>
+
+        <div class="game-container" onclick="jump()">
+            <div id="dino">🦖</div>
+            <div id="cactus">🌵</div>
+            
+            <div class="ground"></div>
+        </div>
+
+        <div class="game-instructions">
+            <div class="instruction-card">
+                <span class="key">SPACE</span>
+                <p>Press to Jump</p>
+            </div>
+            <div class="instruction-card">
+                <span class="key">TAP</span>
+                <p>Mobile Jump</p>
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <div class="footer-container">
+            <div class="footer-brand">
+                <h3>🦖 DINO WORLD</h3>
+                <p>&copy; 2026 Dino Game. <br> Mastering Web Development.</p>
+            </div>
+            <div class="footer-links">
+                <h4>Navigate</h4>
+                <a href="index.html">Home</a>
+                <a href="about.html">Team</a>
+                <a href="contact.html">Contact</a>
+            </div>
+            <div class="footer-newsletter">
+                <h4>Stay Updated</h4>
+                <form class="footer-form">
+                    <input type="email" placeholder="Email Address">
+                    <button type="submit">Join</button>
+                </form>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            &copy; 2026 Dino World. Built with ❤️ by our Team.
+        </div>
+    </footer>
+
+    <script src="../js/script.js"></script>
+</body>
+</html>
