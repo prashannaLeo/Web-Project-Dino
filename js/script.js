@@ -9,6 +9,8 @@ document.addEventListener("DOMContentLoaded", () => {
     let isGameOver = false;
     let collisionInterval = null;
     let scoreInterval = null;
+    const dinoStartLeftPx = 40;
+    let dinoOffsetXPx = 0;
 
     // Simple sound effects using Web Audio API (no external files).
     let audioCtx = null;
@@ -83,9 +85,13 @@ document.addEventListener("DOMContentLoaded", () => {
     const cactusMinDurationMs = 600;
     const cactusDurationStepMs = 120;
 
+    function getSpeedLevel(currentScore) {
+        return Math.floor(currentScore / 20); // every 20 points
+    }
+
     function getCactusDurationForScore(currentScore) {
         // Increase speed as the score grows (faster = smaller duration).
-        const speedLevel = Math.floor(currentScore / 20); // every 20 points
+        const speedLevel = getSpeedLevel(currentScore);
         return Math.max(
             cactusMinDurationMs,
             cactusBaseDurationMs - speedLevel * cactusDurationStepMs
@@ -95,13 +101,34 @@ document.addEventListener("DOMContentLoaded", () => {
     // Function to trigger the jump
     function jump() {
         if (!dino) return; // Only valid on the game page
-        if (!dino.classList.contains("animate-jump")) {
-            dino.classList.add("animate-jump");
-            playJumpSound();
-            setTimeout(() => {
+        if (dino.classList.contains("animate-jump")) return;
+
+        // Make forward jump distance scale with current game speed level.
+        const speedLevel = getSpeedLevel(score);
+        const jumpForwardPx = Math.min(34, 10 + speedLevel * 2);
+        dino.style.setProperty("--jump-forward", `${jumpForwardPx}px`);
+
+        dino.classList.add("animate-jump");
+        playJumpSound();
+
+        // Remove the class exactly when the animation ends (prevents timing drift / stutter).
+        const onAnimationEnd = (event) => {
+            if (event.animationName === "dino-jump") {
                 dino.classList.remove("animate-jump");
-            }, 500);
-        }
+
+                if (gameContainer) {
+                    const maxOffsetPx = Math.max(
+                        0,
+                        gameContainer.clientWidth - dino.offsetWidth - dinoStartLeftPx - 8
+                    );
+                    dinoOffsetXPx = Math.min(maxOffsetPx, dinoOffsetXPx + jumpForwardPx);
+                    dino.style.left = `${dinoStartLeftPx + dinoOffsetXPx}px`;
+                }
+
+                dino.removeEventListener("animationend", onAnimationEnd);
+            }
+        };
+        dino.addEventListener("animationend", onAnimationEnd);
     }
 
     function updateScoreDisplay() {
@@ -121,6 +148,8 @@ document.addEventListener("DOMContentLoaded", () => {
         gameContainer.classList.remove("game-over");
         dino.classList.remove("animate-jump");
         cactus.classList.remove("cactus-paused");
+        dinoOffsetXPx = 0;
+        dino.style.left = `${dinoStartLeftPx}px`;
 
         // Apply initial slow speed.
         cactus.style.animationDuration = `${getCactusDurationForScore(0)}ms`;
