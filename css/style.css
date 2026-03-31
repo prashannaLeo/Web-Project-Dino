@@ -815,6 +815,73 @@ body.about-page {
     width: 100%;
 }
 
+.game-container::before {
+    content: "Click / tap or press SPACE to jump";
+    position: absolute;
+    top: 10px;
+    left: 50%;
+    transform: translateX(-50%);
+    color: #777;
+    font-size: 0.75rem;
+}
+
+.game-container.game-over::before {
+    content: "Game over! Press SPACE or tap to restart";
+    color: #ff8888;
+}
+
+#dino {
+    position: absolute;
+    bottom: 10px;
+    left: 40px;
+    font-size: 2.2rem;
+    transition: bottom 0.1s ease-out;
+    /* Flip so the dino faces to the right consistently */
+    transform: scaleX(-1);
+    transform-origin: center bottom;
+}
+
+#cactus {
+    position: absolute;
+    bottom: 10px;
+    right: -40px;
+    font-size: 2rem;
+}
+
+.cactus-moving {
+    /* JS updates `animationDuration` to increase speed with score */
+    animation: cactus-move 2200ms linear infinite;
+}
+
+.cactus-paused {
+    animation-play-state: paused;
+}
+
+@keyframes cactus-move {
+    0% {
+        right: -40px;
+    }
+    100% {
+        right: 100%;
+    }
+}
+
+.animate-jump {
+    animation: dino-jump 0.5s ease-out;
+}
+
+@keyframes dino-jump {
+    0% {
+        bottom: 10px;
+    }
+    50% {
+        bottom: 80px;
+    }
+    100% {
+        bottom: 10px;
+    }
+}
+
 .ground {
     position: absolute;
     bottom: 0;
