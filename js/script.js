@@ -217,19 +217,21 @@ document.addEventListener("DOMContentLoaded", () => {
     });
 
     // Touch support (Mobile)
-    document.addEventListener("touchstart", (event) => {
-        // Prevent zooming or scrolling when tapping to jump
-        if (event.target.id !== "nav") { // Optional: ignore taps on navigation
-            event.preventDefault();
-            if (gameContainer && cactus && dino) {
+    // Only intercept touches inside the game area; otherwise we break normal scrolling/tapping.
+    if (gameContainer && cactus && dino) {
+        gameContainer.addEventListener(
+            "touchstart",
+            (event) => {
+                event.preventDefault(); // prevent page scroll while tapping the game
                 if (isGameOver) {
                     startGame();
                 } else {
                     jump();
                 }
-            }
-        }
-    }, { passive: false });
+            },
+            { passive: false }
+        );
+    }
 
     // Home page preview (only if the canvas exists)
     const canvas = document.getElementById('gameCanvas');
