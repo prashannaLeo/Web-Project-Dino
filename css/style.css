@@ -571,14 +571,14 @@ body.about-page {
 
 .floating-dino {
     animation: float 3s ease-in-out infinite;
-    width: 96px;
+    width: 15%;
     height: auto;
     background: transparent;
 }
 
 .cactus-group {
     font-size: 2rem;
-    margin-top: 10px;
+    margin-top: 15px;
 }
 
 .ground-line {
