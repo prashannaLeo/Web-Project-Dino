@@ -84,6 +84,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const cactusBaseDurationMs = 2200;
     const cactusMinDurationMs = 600;
     const cactusDurationStepMs = 120;
+    let pendingCactusDurationMs = cactusBaseDurationMs;
 
     function getSpeedLevel(currentScore) {
         return Math.floor(currentScore / 20); // every 20 points
@@ -151,8 +152,9 @@ document.addEventListener("DOMContentLoaded", () => {
         dinoOffsetXPx = 0;
         dino.style.left = `${dinoStartLeftPx}px`;
 
-        // Apply initial slow speed.
-        cactus.style.animationDuration = `${getCactusDurationForScore(0)}ms`;
+        // Apply initial slow speed and sync pending value.
+        pendingCactusDurationMs = getCactusDurationForScore(0);
+        cactus.style.animationDuration = `${pendingCactusDurationMs}ms`;
 
         // Restart the cactus animation by forcing reflow
         cactus.classList.remove("cactus-moving");
@@ -190,11 +192,8 @@ document.addEventListener("DOMContentLoaded", () => {
                     localStorage.setItem(CURRENT_SCORE_KEY, String(score));
                 }
 
-                // Ramp speed with score.
-                const newDuration = getCactusDurationForScore(score);
-                if (cactus.style.animationDuration !== `${newDuration}ms`) {
-                    cactus.style.animationDuration = `${newDuration}ms`;
-                }
+                // Ramp speed with score; apply on next animation cycle.
+                pendingCactusDurationMs = getCactusDurationForScore(score);
             }
         }, 200);
     }
@@ -260,6 +259,16 @@ document.addEventListener("DOMContentLoaded", () => {
             },
             { passive: false }
         );
+    }
+
+    // Apply speed updates at loop boundaries to prevent cactus mid-lane popping.
+    if (cactus) {
+        cactus.addEventListener("animationiteration", () => {
+            const targetDuration = `${pendingCactusDurationMs}ms`;
+            if (cactus.style.animationDuration !== targetDuration) {
+                cactus.style.animationDuration = targetDuration;
+            }
+        });
     }
 
     // Home page preview (only if the canvas exists)
