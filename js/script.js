@@ -233,7 +233,17 @@ document.addEventListener("DOMContentLoaded", () => {
     // Keyboard support (Desktop)
     document.addEventListener("keydown", (event) => {
         if (event.code === "Space") {
-            event.preventDefault(); // Stop page scroll
+            const target = event.target;
+            const isTypingField =
+                target instanceof HTMLElement &&
+                (target.tagName === "INPUT" ||
+                    target.tagName === "TEXTAREA" ||
+                    target.isContentEditable);
+
+            // Allow typing spaces in form/message fields.
+            if (isTypingField) return;
+
+            event.preventDefault(); // Stop page scroll outside text fields
             if (gameContainer && cactus && dino) {
                 if (isGameOver) {
                     startGame();
@@ -326,4 +336,5 @@ document.addEventListener("DOMContentLoaded", () => {
     if (dino && cactus && gameContainer && scoreEl) {
         startGame();
     }
+
 });
