@@ -326,4 +326,6 @@ document.addEventListener("DOMContentLoaded", () => {
     if (dino && cactus && gameContainer && scoreEl) {
         startGame();
     }
+
+    
 });
