@@ -1,23 +1,218 @@
 document.addEventListener("DOMContentLoaded", () => {
     const dino = document.getElementById("dino");
     const gameContainer = document.querySelector(".game-container");
+    const cactus = document.getElementById("cactus");
+    const scoreEl = document.getElementById("score");
+    const highScoreEl = document.getElementById("highScore");
+
+    let score = 0;
+    let isGameOver = false;
+    let collisionInterval = null;
+    let scoreInterval = null;
+
+    // Simple sound effects using Web Audio API (no external files).
+    let audioCtx = null;
+
+    function ensureAudioContext() {
+        if (!window.AudioContext && !window.webkitAudioContext) {
+            return null; // Audio API not supported
+        }
+        if (!audioCtx) {
+            const Ctx = window.AudioContext || window.webkitAudioContext;
+            audioCtx = new Ctx();
+        }
+        if (audioCtx.state === "suspended") {
+            audioCtx.resume();
+        }
+        return audioCtx;
+    }
+
+    function playJumpSound() {
+        const ctx = ensureAudioContext();
+        if (!ctx) return;
+
+        const osc = ctx.createOscillator();
+        const gain = ctx.createGain();
+
+        osc.type = "square";
+        osc.frequency.value = 750; // higher pitch
+
+        const now = ctx.currentTime;
+        gain.gain.setValueAtTime(0, now);
+        gain.gain.linearRampToValueAtTime(0.2, now + 0.01);
+        gain.gain.linearRampToValueAtTime(0, now + 0.12);
+
+        osc.connect(gain);
+        gain.connect(ctx.destination);
+
+        osc.start(now);
+        osc.stop(now + 0.15);
+    }
+
+    function playCrashSound() {
+        const ctx = ensureAudioContext();
+        if (!ctx) return;
+
+        const osc = ctx.createOscillator();
+        const gain = ctx.createGain();
+
+        osc.type = "sawtooth";
+        osc.frequency.value = 200; // lower pitch
+
+        const now = ctx.currentTime;
+        gain.gain.setValueAtTime(0, now);
+        gain.gain.linearRampToValueAtTime(0.3, now + 0.01);
+        gain.gain.exponentialRampToValueAtTime(0.01, now + 0.3);
+
+        osc.connect(gain);
+        gain.connect(ctx.destination);
+
+        osc.start(now);
+        osc.stop(now + 0.35);
+    }
+
+    const HIGH_SCORE_KEY = "dino_high_score";
+    const CURRENT_SCORE_KEY = "dino_current_score";
+
+    let highScore = Number(localStorage.getItem(HIGH_SCORE_KEY)) || 0;
+    if (highScoreEl) {
+        highScoreEl.textContent = String(highScore).padStart(6, "0");
+    }
+
+    const cactusBaseDurationMs = 2200;
+    const cactusMinDurationMs = 600;
+    const cactusDurationStepMs = 120;
+
+    function getCactusDurationForScore(currentScore) {
+        // Increase speed as the score grows (faster = smaller duration).
+        const speedLevel = Math.floor(currentScore / 20); // every 20 points
+        return Math.max(
+            cactusMinDurationMs,
+            cactusBaseDurationMs - speedLevel * cactusDurationStepMs
+        );
+    }
 
     // Function to trigger the jump
     function jump() {
         if (!dino) return; // Only valid on the game page
         if (!dino.classList.contains("animate-jump")) {
             dino.classList.add("animate-jump");
+            playJumpSound();
             setTimeout(() => {
                 dino.classList.remove("animate-jump");
             }, 500);
         }
     }
 
+    function updateScoreDisplay() {
+        if (!scoreEl) return;
+        scoreEl.textContent = String(score).padStart(6, "0");
+    }
+
+    function startGame() {
+        if (!dino || !cactus || !gameContainer) return;
+
+        // Reset state
+        isGameOver = false;
+        score = 0;
+        updateScoreDisplay();
+        localStorage.setItem(CURRENT_SCORE_KEY, "0");
+
+        gameContainer.classList.remove("game-over");
+        dino.classList.remove("animate-jump");
+        cactus.classList.remove("cactus-paused");
+
+        // Apply initial slow speed.
+        cactus.style.animationDuration = `${getCactusDurationForScore(0)}ms`;
+
+        // Restart the cactus animation by forcing reflow
+        cactus.classList.remove("cactus-moving");
+        // Trigger reflow so animation restarts cleanly
+        void cactus.offsetWidth;
+        cactus.classList.add("cactus-moving");
+
+        // Clear any existing intervals
+        if (collisionInterval) clearInterval(collisionInterval);
+        if (scoreInterval) clearInterval(scoreInterval);
+
+        // Collision check loop
+        collisionInterval = setInterval(() => {
+            const dinoRect = dino.getBoundingClientRect();
+            const cactusRect = cactus.getBoundingClientRect();
+
+            const horizontallyOverlapping =
+                dinoRect.right - 10 > cactusRect.left &&
+                dinoRect.left + 10 < cactusRect.right;
+            const verticallyClose = Math.abs(dinoRect.bottom - cactusRect.bottom) < 40;
+
+            if (horizontallyOverlapping && verticallyClose && !isGameOver) {
+                gameOver();
+            }
+        }, 20);
+
+        // Score loop
+        scoreInterval = setInterval(() => {
+            if (!isGameOver) {
+                score += 1;
+                updateScoreDisplay();
+
+                // Save current score occasionally (avoid writing every tick).
+                if (score % 10 === 0) {
+                    localStorage.setItem(CURRENT_SCORE_KEY, String(score));
+                }
+
+                // Ramp speed with score.
+                const newDuration = getCactusDurationForScore(score);
+                if (cactus.style.animationDuration !== `${newDuration}ms`) {
+                    cactus.style.animationDuration = `${newDuration}ms`;
+                }
+            }
+        }, 200);
+    }
+
+    function gameOver() {
+        if (!cactus || !gameContainer) return;
+        isGameOver = true;
+        gameContainer.classList.add("game-over");
+        cactus.classList.add("cactus-paused");
+        if (collisionInterval) clearInterval(collisionInterval);
+        if (scoreInterval) clearInterval(scoreInterval);
+
+        playCrashSound();
+
+        // Persist scores
+        localStorage.setItem(CURRENT_SCORE_KEY, String(score));
+        if (score > highScore) {
+            highScore = score;
+            if (highScoreEl) {
+                highScoreEl.textContent = String(highScore).padStart(6, "0");
+            }
+            localStorage.setItem(HIGH_SCORE_KEY, String(highScore));
+        }
+    }
+
+    // Set up click/tap on the game area
+    if (gameContainer) {
+        gameContainer.addEventListener("click", () => {
+            if (isGameOver) {
+                startGame();
+            } else {
+                jump();
+            }
+        });
+    }
+
     // Keyboard support (Desktop)
     document.addEventListener("keydown", (event) => {
         if (event.code === "Space") {
             event.preventDefault(); // Stop page scroll
-            jump();
+            if (gameContainer && cactus && dino) {
+                if (isGameOver) {
+                    startGame();
+                } else {
+                    jump();
+                }
+            }
         }
     });
 
@@ -25,10 +220,16 @@ document.addEventListener("DOMContentLoaded", () => {
     document.addEventListener("touchstart", (event) => {
         // Prevent zooming or scrolling when tapping to jump
         if (event.target.id !== "nav") { // Optional: ignore taps on navigation
-            event.preventDefault(); 
-            jump();
+            event.preventDefault();
+            if (gameContainer && cactus && dino) {
+                if (isGameOver) {
+                    startGame();
+                } else {
+                    jump();
+                }
+            }
         }
-    }, { passive: false }); 
+    }, { passive: false });
 
     // Home page preview (only if the canvas exists)
     const canvas = document.getElementById('gameCanvas');
@@ -80,4 +281,9 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     });
     // Logic to handle navbar active state if needed
+
+    // Auto-start game when on the game page
+    if (dino && cactus && gameContainer && scoreEl) {
+        startGame();
+    }
 });
