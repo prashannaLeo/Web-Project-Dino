@@ -28,80 +28,51 @@ document.addEventListener("DOMContentLoaded", () => {
             jump();
         }
     }, { passive: false }); 
-});
 
-// Contact Form Validation
-const contactForm = document.getElementById('contactForm');
-if (contactForm) {
-    const emailInput = document.getElementById('email');
-    const messageInput = document.getElementById('message');
-    const emailError = document.getElementById('emailError');
-    const messageError = document.getElementById('messageError');
-    const successMsg = document.getElementById('successMsg');
+// home page
 
-    function isValidEmail(email) {
-        const regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-        return regex.test(email);
-    }
+    const canvas = document.getElementById('gameCanvas');
+    const ctx = canvas.getContext('2d');
 
-    // Function to sanitize message (remove HTML/script tags)
-    function sanitizeMessage(message) {
-        // Remove any HTML tags to prevent code injection
-        const tempDiv = document.createElement('div');
-        tempDiv.textContent = message;
-        return tempDiv.textContent;
-    }
+    // Drawing a simple placeholder dino and ground on the canvas
+    function drawPreview() {
+        // Ground
+        ctx.strokeStyle = '#333';
+        ctx.lineWidth = 2;
+        ctx.beginPath();
+        ctx.moveTo(0, 180);
+        ctx.lineTo(600, 180);
+        ctx.stroke();
 
-    function clearErrors() {
-        if (emailError) emailError.textContent = '';
-        if (messageError) messageError.textContent = '';
-    }
-
-    contactForm.addEventListener('submit', function(e) {
-        e.preventDefault();
-        clearErrors();
+        // Placeholder Text
+        ctx.fillStyle = '#121212';
+        ctx.font = '16px Arial';
+        ctx.fillText('Game Engine Ready...', 220, 100);
         
-        const email = emailInput.value.trim();
-        let message = messageInput.value.trim();
-        let isValid = true;
-        
-        // Email validation
-        if (email === '') {
-            emailError.textContent = 'Email is required';
-            isValid = false;
-        } else if (!isValidEmail(email)) {
-            emailError.textContent = 'Enter a valid email address';
-            isValid = false;
-        }
-        
-        // Message validation - only check if empty, allow any text but sanitize
-        if (message === '') {
-            messageError.textContent = 'Message is required';
-            isValid = false;
+        // Simple Dino Shape (placeholder)
+        ctx.fillStyle = '#555';
+        ctx.fillRect(50, 140, 40, 40);
+    }
+    drawPreview();
+
+    // Newsletter Submission Logic
+    const submitBtn = document.getElementById('submitBtn');
+    submitBtn.addEventListener('click', () => {
+        const email = document.getElementById('userEmail').value;
+        if (email.includes('@')) {
+            alert(`Welcome to the journey, ${email.split('@')[0]}!`);
         } else {
-            // Sanitize the message to remove any HTML/script code
-            message = sanitizeMessage(message);
-            messageInput.value = message;
-        }
-        
-        if (isValid) {
-            successMsg.textContent = '✓ Message sent successfully!';
-            successMsg.classList.add('show');
-            emailInput.value = '';
-            messageInput.value = '';
-            
-            setTimeout(function() {
-                successMsg.classList.remove('show');
-            }, 3000);
+            alert('Please enter a valid email address.');
         }
     });
-}
 
-let score = 0;
-setInterval(() => {
-    score++;
-    const scoreElement = document.getElementById("score");
-    if (scoreElement) {
-        scoreElement.innerText = score.toString().padStart(6, '0');
-    }
-}, 100);
+    // Make navbar active link state change on click (for multi-page feel)
+    const navLinks = document.querySelectorAll('.nav-links a');
+    navLinks.forEach(link => {
+        link.addEventListener('click', function() {
+            navLinks.forEach(l => l.classList.remove('active'));
+            this.classList.add('active');
+        });
+    });
+    // Logic to handle navbar active state if needed
+});
