@@ -777,8 +777,26 @@ body.about-page {
     }
 
     nav {
-        flex-direction: column;
+        flex-direction: row;
+        flex-wrap: wrap;
+        align-items: flex-start;
         gap: 15px;
+    }
+
+    .navbar .logo {
+        order: 1;
+    }
+
+    .navbar .nav-links {
+        order: 3;
+        width: 100%;
+        justify-content: center;
+        margin-top: 10px;
+    }
+
+    .btn-game-zone {
+        order: 2;
+        margin-left: auto;
     }
 }
 
