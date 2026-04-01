@@ -84,8 +84,7 @@ document.addEventListener("DOMContentLoaded", () => {
             "You are the reason the dinosaurs went extinct.",
             "That jump timing was a public service announcement for failure.",
             "Even the cactus looked embarrassed for you.",
-            "You play like your keyboard is powered by potato."
-        ],
+            "My grandma jumps higher than this, and she's a fossil.",        ],
         mediocre: [
             "Getting better, but you're still a disappointment to the T-Rex family.",
             "Wow, you almost reached double digits. Want a gold star?",
